@@ -1,2 +1,12 @@
 
 code/101pointer/.DS_Store
+*.vsidx
+*.vsidx
+*.vsidx
+*.db
+*.db-shm
+*.opendb
+*.db-wal
+*.db
+code/101pointer/.vs/
+code/101pointer/ARM64

@@ -8,5 +8,5 @@ code/101pointer/.DS_Store
 *.opendb
 *.db-wal
 *.db
-code/101pointer/.vs/
+code/101pointer/.vs
 code/101pointer/ARM64

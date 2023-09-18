@@ -76,6 +76,7 @@ static void multidimensional()
   // 2x3
 // 1 2 3
 // 4 5 6
+#if 0
 
     unsigned char arr1[2][ARRSIZE]  { {1,2,3},{4,5,6} };
     unsigned char arr2[][ARRSIZE]  {
@@ -98,7 +99,7 @@ static void multidimensional()
         {{1,2,3,4},{2,3,4,5},{1,2,3,4}},
     };
 
-    for (auto arr : arr2) {
+    for (auto &arr : arr2) {
         for (int i{}; i < ARRSIZE; i++) {
             cout << static_cast<int>(arr[i]) << " " << flush;
         }
@@ -116,12 +117,59 @@ static void multidimensional()
         }
         cout << '\n';
     }
+#endif
+
+#if 1
+    /*堆中的二维数组的两种创建方式*/
+    {
+        /*连续空间*/
+        int size{ 2 };
+        int(*arr5)[3] {new int[size][3]{ {1,1,2},{3,2,3} }};
+        for (int i {}; i  < size; i ++) {
+            /*sizeof(parr5[i]) 可以获取第二维度的数组大小*/
+            for (auto& a : arr5[i]) {
+                cout << a << '=' << flush;
+            }
+            cout << '\n';
+        }
+        delete[] arr5;
+        arr5 = nullptr;
+        /*指针数组*/
+        /*
+            1 2 3 1
+            4 5 6 3
+            1 1 1 1
+        */
+        constexpr int width{ 4 }, height{ 3 };
+        int** arr6 { new int* [height] {} };
+        for (int i {}; i < height; i++){
+            arr6[i] = new int[width] {};
+        }
+
+        arr6[1][1] = 99;/*,修改第1行,第1列的元素为99(从0开始)*/
+
+        for (int i{}; i < height; ++i) {
+            for (int j{}; j < width; ++j) {
+                cout << arr6[i][j] << ' ';
+            }
+            cout << '\n';
+        }
+
+        for (int i{}; i < height; i++){
+            delete arr6[i];
+            arr6[i] = nullptr;
+        }
+        delete[] arr6;
+        arr6 = nullptr;
+    }
+#endif
 }
 
 int main(int argc, char* argv[])
 {
     //One_dimensional();
     multidimensional();
+    (void)getchar();
 	return 0;
 }
 

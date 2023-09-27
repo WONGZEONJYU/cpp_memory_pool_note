@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -58,14 +59,12 @@ int main(int argc, char* argv[])
 	/*3 shared_ptr定制删除函数*/
 	{
 		shared_ptr<XData> sp7(new XData, DelData);
-		shared_ptr<XData> sp8(new XData, [](auto* p) {
-			
+		shared_ptr<XData> sp8(new XData(), [](auto* p) {
 			cout << "Call delete lambda\n";
 			delete p;
 		});
 	}
 	cout << "after delete }\n\n";
-
 
 	/*4 shared_ptr 智能指针指向同一个对象不同的成员*/
 	{
@@ -77,6 +76,39 @@ int main(int argc, char* argv[])
 
 		cout << "sc1 use_count = " << sc1.use_count() << '\n';
 	}
+
+	/*5 shared_ptr 循环引用问题原理*/
+	{
+		class B;
+		class A {
+			public:
+				A() { cout << __FUNCTION__ << '\n'; }
+				~A() { cout << __FUNCTION__ << '\n'; }
+				shared_ptr<B> b1;
+		};
+
+		class B {
+			public:
+				B() { cout << __FUNCTION__ << '\n'; }
+				~B() { cout << __FUNCTION__ << '\n'; }
+				shared_ptr<A> a1;
+		};
+
+		auto a{ make_shared<A>() };	/*=1 */
+		auto b{ make_shared<B>() };	/*=1 */
+		a->b1 = b;/*+1 =2 */
+		cout << "a->b1 = b b.use_count() = " << b.use_count() << '\n';
+		b->a1 = a;/*+1 =2 */
+		cout << "b->a1 = a a.use_count() = " << a.use_count() << '\n';
+		/*
+			a 出作用域 a.use_count() - 1 = 1 a资源不释放 , a.b1不释放
+			b.use_count = 2
+
+			b 出作用域 b.use_count() - 1 = 1 b资源不释放 , b.a1不释放
+			b.use_count() = 1 a.use_count() = 1
+		*/
+	}
+	cout << "after AB }\n\n";
 
 	(void)getchar();
 	return 0;

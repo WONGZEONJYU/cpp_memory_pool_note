@@ -7,7 +7,7 @@
 
 # 2.代码实验
 
-[[]]()
+[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/110_string_vector_mem)
 
 >```c++
 >

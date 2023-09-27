@@ -7,7 +7,7 @@
 
 # 2.实验代码
 
-[[参考代码]]()
+[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/108weak_ptr)
 
 >```c++
 >#include <iostream>

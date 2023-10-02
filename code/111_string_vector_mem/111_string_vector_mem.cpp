@@ -26,8 +26,33 @@ public:
 	int index{};
 };
 
+vector<XData> TestVec(vector<XData>& data)
+{
+	cout << "TestVec data :" << data.data() << '\n';
+	vector<XData> re;
+	re.resize(3);
+	cout << "re data : " << re.data() << '\n';
+	return re;
+}
+
 int main(int argc, char* argv[])
 {
+	{
+		vector<XData> vd;
+		XData d;
+		d.index = 1;
+		vd.push_back(d);
+		d.index = 2;
+		vd.push_back(d);
+		d.index = 3;
+		vd.push_back(d);
+		cout << "vd.data : " << vd.data() << '\n';
+		auto rd{ TestVec(vd) };
+		cout << "rd.data : " << rd.data() << '\n';
+		cout << "re Byte = " << rd.size() * sizeof(XData) << '\n';
+		//cout << "re cap = " << rd.capacity() << '\n';
+	}
+
 	(void)getchar();
 	return 0;
 }

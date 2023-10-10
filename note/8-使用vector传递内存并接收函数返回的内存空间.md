@@ -21,7 +21,7 @@
 >public:
 >	XData() { cout << __FUNCTION__ << '\n'; }
 >	~XData() { cout << __FUNCTION__ << '\n'; }
->	
+>
 >	XData(const XData& o) {
 >		index = o.index;
 >		cout << "Copy XData " << index << '\n';
@@ -52,6 +52,7 @@
 >{
 >	{
 >		vector<XData> vd;
+>#if 0
 >		XData d;
 >		d.index = 1;
 >		vd.push_back(d);
@@ -64,6 +65,7 @@
 >		cout << "rd.data : " << rd.data() << '\n';
 >		cout << "re Byte = " << rd.size() * sizeof(XData) << '\n';
 >		//cout << "re cap = " << rd.capacity() << '\n';
+>#endif
 >	}
 >
 >	(void)getchar();

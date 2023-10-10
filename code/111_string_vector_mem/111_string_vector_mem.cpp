@@ -22,7 +22,6 @@ public:
 		}
 		return *this;
 	}
-
 	int index{};
 };
 
@@ -39,6 +38,7 @@ int main(int argc, char* argv[])
 {
 	{
 		vector<XData> vd;
+#if 1
 		XData d;
 		d.index = 1;
 		vd.push_back(d);
@@ -50,7 +50,8 @@ int main(int argc, char* argv[])
 		auto rd{ TestVec(vd) };
 		cout << "rd.data : " << rd.data() << '\n';
 		cout << "re Byte = " << rd.size() * sizeof(XData) << '\n';
-		//cout << "re cap = " << rd.capacity() << '\n';
+		cout << "re cap = " << rd.capacity() << '\n';
+#endif
 	}
 
 	(void)getchar();

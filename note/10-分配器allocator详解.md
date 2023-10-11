@@ -15,7 +15,7 @@
 
 # 2.实验一
 
-[[参考代码]]()
+[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/113allocator)
 
 >```c++
 >#include <iostream>
@@ -77,7 +77,7 @@
 
 3.1代码
 
-[[参考代码]]()
+[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/113allocator)
 
 >```c++
 >#ifndef MYALLOCATOR

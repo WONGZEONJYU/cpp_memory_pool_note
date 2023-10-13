@@ -40,6 +40,9 @@ int main(int argc,char* argv[])
 		std::construct_at(&data[i]);
 	}
 
+
+	free(data);
+	data = nullptr;
     (void)getchar();
     return 0;
 }

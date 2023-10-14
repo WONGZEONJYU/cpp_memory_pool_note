@@ -2,7 +2,7 @@
 
 # 1. 实验
 
-[[参考代码]]()
+[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/116_class_mem)
 
 >```c++
 >#include <iostream>

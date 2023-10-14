@@ -31,7 +31,6 @@ public:
 	int index{};
 };
 
-
 int main(int argc,char* argv[])
 {
 	constexpr int size{ 3 };

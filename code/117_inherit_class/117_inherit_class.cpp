@@ -2,43 +2,136 @@
 
 using namespace std;
 
-class Base
+namespace _one
 {
-public:
-	int x1{1}, x2{2};
-};
+	class Base
+	{
+	public:
+		int x1{ 1 }, x2{ 2 };
+	};
 
-class A : public Base
+	class A : public Base
+	{
+	public:
+		int a1{ 4 }, x1{ 5 };
+
+	};
+}
+
+namespace _two
 {
-public:
-	int a1{ 4 }, x1{ 5 };
+	class Base1
+	{
+	public:
+		int b11{ 1 }, b12{ 2 };
 
-};
+	};
 
-class Base1
+	class Base2
+	{
+	public:
+		int b21{ 1 }, b22{ 2 };
+
+	};
+
+	/* Base1 ==> Base2 ==> A2 地址顺序从左到右 */
+
+	class A2 :public Base1, public Base2
+	{
+	public:
+		int a1{ 5 }, a2{ 6 };
+	};
+}
+
+namespace _three
 {
-public:
-	int b11{ 1 }, b12{ 2 };
+	class C
+	{
+	public:
+		int c1{};
 
-};
+	};
 
-class Base2
+	class B1 : public C
+	{
+	public:
+		int b1{};
+	};
+
+	class B2 : public C
+	{
+	public:
+		int b2{};
+	};
+
+	class A3 : public B1,public B2
+	{
+	public:
+		int a3{};
+	};
+
+	/*
+		C	C
+		B1	B2
+		  A3
+	*/
+
+}
+
+namespace _fourth
 {
-public:
-	int b21{ 1 }, b22{ 2 };
+	class C
+	{
+	public:
+		int c1{};
+	};
 
-};
+	class B3 : virtual public C
+	{
+	public:
+		int b1{};
+	};
 
-/* Base1 ==> Base2 ==> A2 地址顺序从左到右 */
+	class B4 : virtual public C
+	{
+	public:
+		int b2{};
+	};
 
-class A2 :public Base1, public Base2
-{
-public:
-	int a1{ 5 }, a2{ 6 };
-};
+	class A4 : public B3, public B4
+	{
+	public:
+		int a3{};
+	};
+
+	/*
+		C
+	B3		B4
+		A4
+	*/
+}
+
+using namespace _one;
+using namespace _two;
+using namespace _three;
+using namespace _fourth;
 
 int main(int argc, char* argv[])
 {
+
+#if 1
+	{
+		A3 a;
+		cout << "a.C::c1 address : \t\t" << reinterpret_cast<long long>(&a.C::c1) << "\n";
+		cout << "a.B1::c1 address : \t\t" << reinterpret_cast<long long>(&a.B1::c1) << "\n";
+		cout << "a.B2::c1 address : \t\t" << reinterpret_cast<long long>(&a.B2::c1) << "\n";
+
+		A4 a4;
+		cout << "a4.C::c1 address : \t\t" << reinterpret_cast<long long>(&a4.C::c1) << "\n";
+		cout << "a4.B3::c1 address : \t\t" << reinterpret_cast<long long>(&a4.B3::c1) << "\n";
+		cout << "a4.B4::c1 address : \t\t" << reinterpret_cast<long long>(&a4.B4::c1) << "\n";
+	}
+#endif
 
 #if 0
 	/*单继承的内存指针分析*/

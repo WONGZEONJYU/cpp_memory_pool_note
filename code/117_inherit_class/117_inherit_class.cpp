@@ -75,7 +75,6 @@ namespace _three
 		B1	B2
 		  A3
 	*/
-
 }
 
 namespace _fourth
@@ -118,13 +117,12 @@ using namespace _fourth;
 
 int main(int argc, char* argv[])
 {
-
 #if 1
 	{
-		A3 a;
-		cout << "a.C::c1 address : \t\t" << reinterpret_cast<long long>(&a.C::c1) << "\n";
-		cout << "a.B1::c1 address : \t\t" << reinterpret_cast<long long>(&a.B1::c1) << "\n";
-		cout << "a.B2::c1 address : \t\t" << reinterpret_cast<long long>(&a.B2::c1) << "\n";
+		//A3 a;
+		//cout << "a.C::c1 address : \t\t" << reinterpret_cast<long long>(&a.C::c1) << "\n";
+		//cout << "a.B1::c1 address : \t\t" << reinterpret_cast<long long>(&a.B1::c1) << "\n";
+		//cout << "a.B2::c1 address : \t\t" << reinterpret_cast<long long>(&a.B2::c1) << "\n";
 
 		A4 a4;
 		cout << "a4.C::c1 address : \t\t" << reinterpret_cast<long long>(&a4.C::c1) << "\n";

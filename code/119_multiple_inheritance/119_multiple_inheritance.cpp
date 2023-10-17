@@ -18,13 +18,8 @@ public:
 
 class C :public A, public B
 {
-	//void fA() override { cout << __FUNCTION__ << "\n"; }
-	//void gA() override { cout << __FUNCTION__ << "\n"; }
-	//void fB() override { cout << __FUNCTION__ << "\n"; };
-	//void gB() override { cout << __FUNCTION__ << "\n"; };
 	virtual void fC() { cout << __FUNCTION__ << "\n"; }
 	virtual void gC() { cout << __FUNCTION__ << "\n"; }
-	virtual void fC1() { cout << __FUNCTION__ << "\n"; }
 };
 
 using VFunc = void(*)();

@@ -27,36 +27,56 @@ options.largest_required_pool_block：该选项用于设置内存池所需的最大内存块大小。
 
 请注意，具体的选项名称和定义可能会因不同的内存池实现而有所差异。建议查阅相关文档或参考库的使用说明以了解特定内存池实现中这些选项的详细含义和用法。
 
+					**内存申请是呈指数级增长**
+例如:max_blocks_per_chunk 设置 1024 * 1024 * 100 = 100M
+初始化之后内存池从上游分配好100m
+在100M分配完成之后,需要继续分配的时候,内存池从上游继续申请100M,又分配完之后,内存池这个时候就向上申请200M,下一次400M,下一次800M,呈指数级增长
+
+如果自定义大小超出largest_required_pool_block大小,每次就按照自定义大小分配
+
 */
 
 int main(int argc, char* argv[])
 {
+
 	pool_options opt;
 	opt.largest_required_pool_block = 1024 * 1024 * 10;	/*大数据块的字节数 */
-	/**/
 	/*10M*/
 	opt.max_blocks_per_chunk = 1024 * 1024 * 100;		/*普通数据,每块数据块的大小*/
+	/*如果一个数据块分配完了，还需要继续分配的话,内存会先去申请max_blocks_per_chunk个回来*/
+	/*如果当个数据块超出了largest_required_pool_block,则按照*/
 	/*100M*/
 
 	/*线程安全的内存池*/
 	synchronized_pool_resource mpool(opt);
 	std::vector<void*> datas;
 
-	constexpr int size{ 1024 * 1024 }; /*1M*/
+	constexpr int size{ 1024 * 1024  }; /*1M*/
 
-	for (int i{}; i < 2048; i++){
+	for (int i{}; i < 1024; i++){	/*一共申请1G*/
 		try {
 			/*从内存池申请一块空间*/
-			auto data{ mpool.allocate(size) };
+			auto data{ mpool.allocate(size) }; /*每次申请1M*/
 			datas.push_back(data);
 			cout << "+" << flush;
-			this_thread::sleep_for(milliseconds(10));
+			this_thread::sleep_for(milliseconds(20));
 		}
 		catch (const std::exception& ex) {
 			cerr << "mpool.allocate failed!" << ex.what() << "\n";
 			exit(-1);
 		}
 	}
+	
+	auto b1{ mpool.allocate(1024 * 1024 * 20) }; /*申请大块空间*/
+	mpool.deallocate(b1, 1024 * 1024 * 20);
+
+	for (auto &d : datas) { /*回收空间*/
+		mpool.deallocate(d, size);
+		cout << "-" << flush;
+		this_thread::sleep_for(milliseconds(20));
+	}
+
+	mpool.release(); /*释放内存池所有内存*/
 
 	(void)getchar();
 	return 0;

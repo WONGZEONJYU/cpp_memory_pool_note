@@ -8,7 +8,7 @@
 
 # 2.实验
 
-[[参考代码]]()
+[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/115_construct_at_destroy)
 
 >```c++
 >#include <iostream>
@@ -68,5 +68,5 @@
 >
 >
 >```
->
-><img src="./assets/image-20231013230450469.png" alt="image-20231013230450469" />
+
+<img src="./assets/image-20231013230450469.png" alt="image-20231013230450469" /> 

@@ -7,8 +7,8 @@
 >- 可复制赋值 (Copy_Assignable)
 >- 数据访问非线程安全
 >- `shared_ptr` 的控制块是线程安全
->
-><img src="./assets/image-20230922153508124.png" alt="image-20230922153508124" />
+
+<img src="./assets/image-20230922153508124.png" alt="image-20230922153508124" /> 
 
 # 2.代码实验
 
@@ -132,5 +132,5 @@
 >}
 >
 >```
->
-><img src="./assets/image-20230927114318364.png" alt="image-20230927114318364" />
+
+<img src="./assets/image-20230927114318364.png" alt="image-20230927114318364" /> 

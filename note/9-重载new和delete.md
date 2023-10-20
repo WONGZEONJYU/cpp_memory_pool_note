@@ -8,7 +8,7 @@
 
 # 2.重载的全局new和delete
 
-[[参考代码]]()
+[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/112operator_new)
 
 >```c++
 >#include <iostream>
@@ -84,12 +84,12 @@
 >}
 >
 >```
->
-><img src="./assets/image-20231010141053778.png" alt="image-20231010141053778" />
+
+<img src="./assets/image-20231010141053778.png" alt="image-20231010141053778" /> 
 
 # 3. 重载类的操作符的new和delete
 
-[[参考代码]]()
+[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/112operator_new)
 
 >```c++
 >#include <iostream>
@@ -155,8 +155,8 @@
 >	return 0;
 >}
 >```
->
-><img src="./assets/image-20231010160116251.png" alt="image-20231010160116251" />
+
+<img src="./assets/image-20231010160116251.png" alt="image-20231010160116251" /> 
 
 # 4. 放置 placement new 和 delete,new 的空间指向已有的地址中 
 
@@ -167,7 +167,7 @@
 
 ## 4.1 代码
 
-[[参考代码]]()
+[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/112operator_new)
 
 >```c++
 >#include <iostream>
@@ -256,8 +256,5 @@
 >}
 >
 >```
->
-><img src="./assets/image-20231010172748794.png" alt="image-20231010172748794" />
 
-
-
+<img src="./assets/image-20231010172748794.png" alt="image-20231010172748794" /> 

@@ -66,8 +66,8 @@
 >
 >
 >```
->
-><img src="./assets/image-20231011143954774.png" alt="image-20231011143954774" />
+
+<img src="./assets/image-20231011143954774.png" alt="image-20231011143954774" /> 
 
 # 3. 自定义分配器
 
@@ -172,5 +172,5 @@
 >	return 0;
 >}
 >```
->
-><img src="./assets/image-20231011181559087.png" alt="image-20231011181559087" />
+
+<img src="./assets/image-20231011181559087.png" alt="image-20231011181559087" /> 

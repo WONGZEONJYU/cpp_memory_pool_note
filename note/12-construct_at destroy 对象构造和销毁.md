@@ -1,14 +1,14 @@
-# 12- `construct_at destroy` 对象构造和销毁
+# `construct_at destroy` 对象构造和销毁
 
-# 1.需要c++17 版本以上支持,详情看代码
+# 1. 需要c++17 版本以上支持,详情看代码
 
->[[c++参考链接]](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)
+>* [[c++参考链接]](https://zh.cppreference.com/w/%E9%A6%96%E9%A1%B5)
 >
->建议用 vs2019 以上版本
+>* 建议用 VS2019 以上版本
 
-# 2.实验
+# 2. 实验
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/115_construct_at_destroy)
+[[参考代码]](/code/115_construct_at_destroy)
 
 >```c++
 >#include <iostream>

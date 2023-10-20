@@ -1,4 +1,4 @@
-# 8-使用vector传递内存并接收函数返回的内存空间
+# 使用vector传递内存并接收函数返回的内存空间
 
 # 1.优点
 
@@ -8,7 +8,7 @@
 
 # 2.实验
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/111_string_vector_mem)
+[[参考代码]](/code/111_string_vector_mem)
 
 >```c++
 >#include <iostream>

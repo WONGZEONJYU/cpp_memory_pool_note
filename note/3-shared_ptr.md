@@ -1,4 +1,4 @@
-# 3-`shared_ptr` 共享智能指针
+# `shared_ptr` 共享智能指针
 
 # 1.基本知识
 
@@ -12,7 +12,7 @@
 
 # 2.代码实验
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/107shared_ptr)
+[[参考代码]](/code/107shared_ptr)
 
 >```c++
 >#include <iostream>

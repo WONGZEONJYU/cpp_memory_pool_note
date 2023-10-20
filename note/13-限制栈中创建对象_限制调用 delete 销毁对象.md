@@ -1,8 +1,8 @@
-# 13-限制栈中创建对象 , 限制调用 delete 销毁对象  
+# 限制栈中创建对象 , 限制调用 delete 销毁对象  
 
 # 1. 实验
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/116_class_mem)
+[[参考代码]](/code/116_class_mem)
 
 >```c++
 >#include <iostream>

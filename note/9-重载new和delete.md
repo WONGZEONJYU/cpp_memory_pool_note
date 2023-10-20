@@ -1,4 +1,4 @@
-# 9-重载new和delete
+# 重载new和delete
 
 # 1. 为什么要重载new与delete
 
@@ -8,7 +8,7 @@
 
 # 2.重载的全局new和delete
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/112operator_new)
+[[参考代码]](/code/112operator_new)
 
 >```c++
 >#include <iostream>
@@ -89,7 +89,7 @@
 
 # 3. 重载类的操作符的new和delete
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/112operator_new)
+[[参考代码]](/code/112operator_new)
 
 >```c++
 >#include <iostream>
@@ -167,7 +167,7 @@
 
 ## 4.1 代码
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/112operator_new)
+[[参考代码]](/code/112operator_new)
 
 >```c++
 >#include <iostream>

@@ -1,21 +1,21 @@
-# 10-分配器allocator详解
+# 分配器allocator详解
 
-# 1.基础知识
+# 1. 基础知识
 
->使用 allocator 将内存分配、对象构造分离开 修改空间申请到内存池 使用过程中 , 可以先分配内存 , 对象不
->构造 , 使用时再构造  
+>* 使用 allocator 将内存分配、对象构造分离开 修改空间申请到内存池 使用过程中 , 可以先分配内存 , 对象不
+>  构造 , 使用时再构造  
 >
->分配用于实现容器算法时 , 将其与储存细节隔离从而解耦合
+>* 分配用于实现容器算法时 , 将其与储存细节隔离从而解耦合
 >
->分配器提供存储分配与释放的标准方法
+>* 分配器提供存储分配与释放的标准方法
 >
->`STL` 实现了一个标准的分配器 `allocator`
+>* `STL` 实现了一个标准的分配器 `allocator`
 >
->演示标准分配器使用 , c++17 需要 tailer 调用构造和析构
+>* 演示标准分配器使用 , c++17 需要 tailer 调用构造和析构
 
-# 2.实验一
+# 2. 实验一
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/113allocator)
+[[参考代码]](/code/113allocator)
 
 >```c++
 >#include <iostream>
@@ -71,13 +71,13 @@
 
 # 3. 自定义分配器
 
->可以演示内存共享 , 内存泄漏探测 , 预分配对象存储,内存池
+>* 可以演示内存共享 , 内存泄漏探测 , 预分配对象存储,内存池
 >
->演示自定义vector和list分配器,并分析其源码
+>* 演示自定义vector和list分配器,并分析其源码
 
-3.1代码
+## 3.1 代码
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/113allocator)
+[[参考代码]](/code/113allocator)
 
 >```c++
 >#ifndef MYALLOCATOR

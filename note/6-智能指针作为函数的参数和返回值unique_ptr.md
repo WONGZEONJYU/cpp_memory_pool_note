@@ -1,8 +1,8 @@
-# 6-智能指针作为函数的参数和返回值 `unique_ptr`
+# 智能指针作为函数的参数和返回值 `unique_ptr`
 
 # 1.实验代码
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/109function_arg_ptr)
+[[参考代码]](/code/109function_arg_ptr)
 
 >```c++
 >namespace _test_2_

@@ -1,4 +1,4 @@
-# 7-string作为函数参数内存的输入和输出
+# string作为函数参数内存的输入和输出
 
 # 1.为什么使用string作为函数参数进行输入输出?
 
@@ -7,7 +7,7 @@
 
 # 2.代码实验
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/110_string_vector_mem)
+[[参考代码]](/code/110_string_vector_mem)
 
 >```c++
 >#include <iostream>

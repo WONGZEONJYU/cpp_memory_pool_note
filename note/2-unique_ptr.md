@@ -1,4 +1,4 @@
-# 二、智能指针
+# 智能指针
 
 # 1. `unique_ptr`
 
@@ -11,7 +11,7 @@
 
 ## 1.2 代码实验
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/106unique_ptr)
+[[参考代码]](/code/106unique_ptr)
 
 >```c++
 >#include <iostream>

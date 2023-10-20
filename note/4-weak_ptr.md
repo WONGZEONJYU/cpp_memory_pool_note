@@ -1,13 +1,13 @@
-# 4-weak_ptr 
+# weak_ptr 
 
 # 1.基本知识
 
->use_count 返回管理该对象的 shared_ptr 对象数量 expired 检查被引用的对象是否已删除 lock 创建管理被
->引用的对象的 shared_ptr
+>* use_count 返回管理该对象的 shared_ptr 对象数量 expired 检查被引用的对象是否已删除 lock 创建管理被
+>  引用的对象的 shared_ptr
 
 # 2.实验代码
 
-[[参考代码]](https://github.com/WONGZEONJYU/cpp_memory_pool_note/tree/main/code/108weak_ptr)
+[[参考代码]](/code/108weak_ptr)
 
 >```c++
 >#include <iostream>

@@ -7,7 +7,6 @@
 class XCrypt
 {
 public:
-
 	/// <summary>
 	/// 初始化密钥 , DES加密算法 密钥最多8bit 多余丢弃不足补0
 	/// </summary>
@@ -45,4 +44,4 @@ private:
 	DES_key_schedule key_sch_;
 };
 
-#endif // !1
+#endif

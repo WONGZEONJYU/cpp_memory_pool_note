@@ -28,31 +28,38 @@ bool XCrypt::Init(std::string password)
 size_t XCrypt::Encrypt(const char* in_data, const size_t insize, char* out_data, bool is_end)
 {
     if ((!in_data) || (!out_data) || (insize <= 0)) {
-        return -1;
+        return 0;
     }
 
-    const_DES_cblock in{}; /*输入数据*/
-    DES_cblock out{};/*输出*/
-    const auto block_size {sizeof(const_DES_cblock)};
+    const auto block_size{ sizeof(const_DES_cblock) }, over{ insize % block_size },
+        padding{ block_size - over };
+
     size_t write_size{}, data_size{};
 
     for (size_t i{}; i < insize; i+= block_size){
 
+        const_DES_cblock in{}; /*输入(未加密数据)*/
+        DES_cblock out{};/*输出(加密后数据)*/
+
         const auto temp_v{ insize - i };
 
-        if (temp_v < block_size) {
-            data_size = temp_v;
-        }else {
-            data_size = block_size;
-        }
+        data_size = (temp_v < block_size) ? temp_v : block_size;
 
         memcpy(in, in_data + write_size, data_size);
 
         /*填充 补充的数据大小 @@@@@@@1 @@@55555 @@@@@@@@88888888*/
-        const auto r{ (i + block_size) >= insize };
+        const auto r{ is_end && ((i + block_size) >= insize) };
 
-        if (is_end && r){
-
+        if (r){
+            //@@@@@@@@8888888
+            if (padding == block_size) { /*补充多8个字节*/
+                DES_ecb_encrypt(&in, &out, &key_sch_, DES_ENCRYPT);
+                memcpy(out_data + write_size, &out, block_size);
+                write_size += block_size;
+                memset(in, padding, sizeof(in)); //填充8
+            }else{ //@@@@@@@1   @@@55555
+                memset(in + over, padding, padding);
+            }
         }
 
         DES_ecb_encrypt(&in,&out,&key_sch_,DES_ENCRYPT);

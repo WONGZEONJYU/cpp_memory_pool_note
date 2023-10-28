@@ -3,6 +3,11 @@
 
 using namespace std;
 
+XCrypt::XCrypt(std::string password)
+{
+    Init(std::move(password));
+}
+
 /*初始化密钥 , DES加密算法 密钥最多8bit 多余丢弃不足补0*/
 bool XCrypt::Init(string password)
 {
@@ -12,9 +17,8 @@ bool XCrypt::Init(string password)
     if (key_size > sizeof(key)){ /*多余丢弃*/
         key_size = sizeof(key);
     }
-    
     memcpy(key, password.c_str(), key_size);
-    (void)DES_set_key(&key,&key_sch_);
+    (void)DES_set_key(&key, &key_sch_);
     return true;
 }
 

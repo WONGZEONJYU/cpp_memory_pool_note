@@ -21,9 +21,21 @@
     <ClCompile Include="xcrypt.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="xiostream.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="xreadtask.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xcrypt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xiostream.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xreadtask.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

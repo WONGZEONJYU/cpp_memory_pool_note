@@ -7,6 +7,8 @@
 class XCrypt
 {
 public:
+	explicit XCrypt() = default;
+	explicit XCrypt(std::string password);
 	/// <summary>
 	/// 初始化密钥 , DES加密算法 密钥最多8bit 多余丢弃不足补0
 	/// </summary>
@@ -39,9 +41,8 @@ public:
 	size_t Decrypt(const char* in_data, size_t insize,
 		char* out_data,bool is_end = false);
 
-private:
 	/*存储密钥*/
-	DES_key_schedule key_sch_;
+	DES_key_schedule key_sch_{};
 };
 
 #endif

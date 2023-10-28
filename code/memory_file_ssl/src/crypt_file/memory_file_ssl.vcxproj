@@ -142,9 +142,13 @@
   <ItemGroup>
     <ClCompile Include="crypt_file.cpp" />
     <ClCompile Include="xcrypt.cpp" />
+    <ClCompile Include="xiostream.cpp" />
+    <ClCompile Include="xreadtask.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xcrypt.h" />
+    <ClInclude Include="xiostream.h" />
+    <ClInclude Include="xreadtask.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

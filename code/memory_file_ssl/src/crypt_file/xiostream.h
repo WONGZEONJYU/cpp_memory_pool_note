@@ -40,16 +40,16 @@ protected:
 	constexpr bool is_exit() const noexcept { return is_exit_; };
 
 	/// <summary>
-	/// 
+	/// 保存文件大小
 	/// </summary>
 	/// <param name=""></param>
-	void data_byte(uint64_t);
+	void Ass_data_byte(uint64_t);
 
 	/// <summary>
-	/// 
+	/// 获取文件大小
 	/// </summary>
 	/// <returns></returns>
-	uint64_t data_byte() const;
+	uint64_t xs_data_byte() const;
 
 private:
 	std::thread th_;

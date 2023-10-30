@@ -1,14 +1,15 @@
 #include <iostream>
 #include "xcrypt.h"
+#include "xreadtask.h"
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
+#if 0
 	XCrypt crypt;
 	crypt.Init("12345678");
 
-#if 1
 	{
 		cout << "====================1 begin======================\n";
 
@@ -54,6 +55,12 @@ int main(int argc, char* argv[])
 	}
 
 #endif
+
+	XReadTask rt;
+	rt.Init("../../bin/x86/img/test.png");
+	rt.Start();
+	rt.Wait();
+
 	(void)getchar();
 	return 0;
 }

@@ -15,7 +15,6 @@ public:
 	/// <returns></returns>
 	bool Init(std::string filename);
 
-
 private:
 	/// <summary>
 	/// 线程入口函数

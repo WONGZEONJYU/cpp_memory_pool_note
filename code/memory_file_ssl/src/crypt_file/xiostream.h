@@ -36,6 +36,7 @@ public:
 	void set_mem_pool(const _sp_mrs_type&);
 
 protected:
+
 	explicit XIOStream() = default;
 	/// <summary>
 	/// 线程入口函数
@@ -60,11 +61,12 @@ protected:
 	/// <returns></returns>
 	uint64_t xs_data_byte() const;
 
+	_sp_mrs_type mem_pool_;
+
 private:
 	std::thread th_;
 	bool is_exit_{};
 	uint64_t data_byte_{};
-	_sp_mrs_type mem_pool_;
 };
 
 #endif

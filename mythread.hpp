@@ -15,7 +15,7 @@ public:
       virtual void _M_run() = 0;
     };
 
-    using _State_ptr = unique_ptr<_State>;
+    using _State_ptr = std::unique_ptr<_State>;
 
     using __gthread_t = void*;
 
@@ -40,7 +40,7 @@ public:
     }
 
     template<typename _Callable, typename... _Args>
-    explicit thread(_Callable&& __f, _Args&&... __args){
+    explicit Mythread(_Callable&& __f, _Args&&... __args){
 	    auto __depend = reinterpret_cast<void(*)()>(&pthread_create);
         _M_start_thread(_S_make_state( __make_invoker(std::forward<_Callable>(__f),std::forward<_Args>(__args)...)),__depend);
     }

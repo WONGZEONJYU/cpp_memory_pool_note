@@ -1,6 +1,8 @@
 #include "xreadtask.h"
 #include <iostream>
 #include <thread>
+#include <memory_resource>
+#include "xdata.h"
 
 using namespace std;
 using namespace chrono;
@@ -46,11 +48,12 @@ void XReadTask::Main()
 		}
 
 		char buf[1024 * 10]{};
+
+
+
 		ifs_.read(buf, sizeof(buf));
 		cout << "[" << ifs_.gcount() << "] " << flush;
 
 	}
 	cout << "\nend " << __FUNCTION__ << "\n";
 }
-
-

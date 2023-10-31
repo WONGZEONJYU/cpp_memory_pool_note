@@ -17,12 +17,14 @@ void XIOStream::Wait() {
 		th_.join();
 	}
 }
+
 /// <summary>
 /// 线程退出,需要用Wait等待
 /// </summary>
 void XIOStream::Stop() {
 	is_exit_ = true;
 }
+
 /// <summary>
 /// 保存文件大小
 /// </summary>
@@ -30,10 +32,15 @@ void XIOStream::Stop() {
 void XIOStream::Ass_data_byte(const uint64_t n) {
 	data_byte_ = n;
 }
+
 /// <summary>
 /// 获取文件大小
 /// </summary>
 /// <returns></returns>
 uint64_t XIOStream::xs_data_byte() const {
 	return data_byte_;
+}
+
+void XIOStream::set_mem_pool(const _sp_mrs_type& p) {
+	mem_pool_ = p;
 }

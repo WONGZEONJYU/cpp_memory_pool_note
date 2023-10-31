@@ -2,6 +2,8 @@
 #define XIOSTREAM_H_
 
 #include <thread>
+#include <memory>
+#include <memory_resource>
 
 class XIOStream
 {
@@ -11,7 +13,7 @@ class XIOStream
 	XIOStream& operator=(XIOStream&&) = delete;
 
 public:
-	explicit XIOStream() = default;
+	using _sp_mrs_type = std::shared_ptr<std::pmr::memory_resource>;
 	/// <summary>
 	/// 线程启动
 	/// </summary>
@@ -27,7 +29,14 @@ public:
 	/// </summary>
 	void Stop();
 
+	/// <summary>
+	/// 设置内存池
+	/// </summary>
+	/// <param name=""></param>
+	void set_mem_pool(const _sp_mrs_type&);
+
 protected:
+	explicit XIOStream() = default;
 	/// <summary>
 	/// 线程入口函数
 	/// </summary>
@@ -55,6 +64,7 @@ private:
 	std::thread th_;
 	bool is_exit_{};
 	uint64_t data_byte_{};
+	_sp_mrs_type mem_pool_;
 };
 
 #endif

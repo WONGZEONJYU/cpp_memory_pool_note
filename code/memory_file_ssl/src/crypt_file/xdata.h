@@ -8,13 +8,16 @@ class XData final
 {
 	explicit XData() = default;
 	XData(const XData& ) = delete;
-	XData(XData&&) = delete;
 	XData& operator=(const XData&) = delete;
-	XData& operator=(XData&&) = delete;
-	
+
 public:
 	using _sp_mrs_type = std::shared_ptr<std::pmr::memory_resource>;
 	using _sp_xdata_type = std::shared_ptr<XData>;
+
+	XData(XData&& ) noexcept;
+	
+	XData& operator=(XData&& ) noexcept;
+
 	/// <summary>
 	/// 创建空间
 	/// </summary>
@@ -40,6 +43,7 @@ public:
 	~XData();
 
 private:
+	void _Move(XData&& obj);
 	void* data_{};
 	uint64_t size_{};/*数据字节数*/
 	uint64_t mem_size_{};/*占用空间字节数*/

@@ -16,6 +16,21 @@ XData::_sp_xdata_type XData::Make(const _sp_mrs_type& pool)
 	return ptr;
 }
 
+XData::XData(XData&& obj) noexcept
+{
+	cout << __FUNCTION__ << flush;
+	_Move(std::move(obj));
+}
+
+XData& XData::operator=(XData&& obj) noexcept
+{
+	cout << __FUNCTION__ << flush;
+	if (this!= addressof(obj)){
+		_Move(std::move(obj));
+	}
+	return *this;
+}
+
 /// <summary>
 /// ´´½¨¿Õ¼ä
 /// </summary>
@@ -34,8 +49,8 @@ void* XData::New(const uint64_t mem_size)
 	}
 
 	data_ = mem_pool_->allocate(mem_size);
-	mem_size_ = mem_size_;
-	size_ = mem_size_;
+	this->mem_size_ = mem_size;
+	this->size_ = mem_size;
 	return data_;
 }
 
@@ -46,10 +61,18 @@ XData::~XData()
 	if (is_){
 		return;
 	}
-
 	mem_pool_->deallocate(data_, mem_size_);
 	data_ = nullptr;
 	size_ = 0;
 }
 
-
+void XData::_Move(XData&& obj)
+{
+	data_ = obj.data_;
+	size_ = obj.size_;
+	mem_size_ = obj.mem_size_;
+	mem_pool_ = move(obj.mem_pool_);
+	obj.data_ = nullptr;
+	obj.size_ = 0;
+	obj.mem_size_ = 0;
+}

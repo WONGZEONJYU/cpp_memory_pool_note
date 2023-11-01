@@ -9,15 +9,12 @@ using namespace std;
 using namespace pmr;
 static inline void XCrypt_t();
 
-static mutex mux;
-
 int main(int argc, char* argv[])
 {
 	pool_options opt;
 
-	auto mp{make_shared<synchronized_pool_resource>(opt)};
-	//XReadTask::_sp_mrs_type mp{new synchronized_pool_resource ()};
-	unique_lock<mutex> lock;
+	auto mp{make_shared<synchronized_pool_resource>()};
+
 	XReadTask rt;
 	rt.Init("../../bin/x86/img/test.png");
 	rt.set_mem_pool(mp);

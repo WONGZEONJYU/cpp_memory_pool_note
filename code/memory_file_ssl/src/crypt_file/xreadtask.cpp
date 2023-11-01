@@ -47,13 +47,21 @@ void XReadTask::Main()
 			break;
 		}
 
-		char buf[1024 * 10]{};
+		auto data{ XData::Make(mem_pool_) };
+		const auto _mem_size{ 1024 };
+		auto buf{ data->New(_mem_size) };
 
+		ifs_.read(static_cast<char*>(buf), _mem_size);
 
+		const auto t_size{ ifs_.gcount() };
 
-		ifs_.read(buf, sizeof(buf));
-		cout << "[" << ifs_.gcount() << "] " << flush;
+		if (t_size <= 0) {
+			break;
+		}
 
+		data->set_size(t_size);
+
+		cout << "[" << t_size << "] " << flush;
 	}
 	cout << "\nend " << __FUNCTION__ << "\n";
 }

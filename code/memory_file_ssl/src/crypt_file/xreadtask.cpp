@@ -42,7 +42,9 @@ bool XReadTask::Init(string filename)
 void XReadTask::Main()
 {
 	cout << "begin " << __FUNCTION__ << "\n";
+
 	while (!is_exit()){
+
 		if (ifs_.eof()){
 			break;
 		}
@@ -61,7 +63,12 @@ void XReadTask::Main()
 
 		data->set_size(t_size);
 
-		cout << "[" << t_size << "] " << flush;
+		//cout << "[" << t_size << "] " << flush;
+
+		if (next_) {
+			next_->PushBack(data);
+		}
+		
 	}
 	cout << "\nend " << __FUNCTION__ << "\n";
 }

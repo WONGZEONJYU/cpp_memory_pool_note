@@ -44,3 +44,24 @@ uint64_t XIOStream::xs_data_byte() const {
 void XIOStream::set_mem_pool(const _sp_mrs_type& p) {
 	mem_pool_ = p;
 }
+
+/// <summary>
+/// 给对象传递数据,线程安全
+/// </summary>
+/// <param name="_data"></param>
+void XIOStream::PushBack(const _sp_xdata_type& _data) {
+	unique_lock<mutex> lock(mux_);
+	datas_.push_back(_data);
+	/*考虑最大列表问题?*/
+}
+
+XIOStream::_sp_xdata_type XIOStream::PopFront()
+{
+	unique_lock<mutex> lock(mux_);
+	if (datas_.empty()){
+		return {};
+	}
+	const auto re{ datas_.front() };
+	datas_.pop_front();
+	return re;
+}

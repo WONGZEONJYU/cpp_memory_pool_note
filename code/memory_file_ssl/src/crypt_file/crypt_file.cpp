@@ -3,7 +3,7 @@
 #include <memory_resource>
 #include "xcrypt.h"
 #include "xreadtask.h"
-#include <mutex>
+#include "xcrypt_task.h"
 
 using namespace std;
 using namespace pmr;
@@ -11,15 +11,20 @@ static inline void XCrypt_t();
 
 int main(int argc, char* argv[])
 {
-	pool_options opt;
-
 	auto mp{make_shared<synchronized_pool_resource>()};
 
-	XReadTask rt;
-	rt.Init("../../bin/x86/img/test.png");
-	rt.set_mem_pool(mp);
-	rt.Start();
-	rt.Wait();
+	auto rt{make_shared<XReadTask>()};
+	rt->Init("../../bin/x86/img/test.png");
+	rt->set_mem_pool(mp);
+
+	auto ct{make_shared<XCryptTask>()};
+	rt->set_next(ct);
+	
+	rt->Start();
+	ct->Start();
+
+	rt->Wait();
+	ct->Wait();
 
 	(void)getchar();
 	return 0;
@@ -73,6 +78,5 @@ static inline void XCrypt_t()
 			"\nde_out : " << de_out << "\n";
 		cout << "=====================3 end=======================\n\n";
 	}
-
 }
 

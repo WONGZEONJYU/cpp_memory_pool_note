@@ -30,6 +30,9 @@
     <ClCompile Include="xdata.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="xcrypt_task.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xcrypt.h">
@@ -42,6 +45,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="xdata.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xcrypt_task.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

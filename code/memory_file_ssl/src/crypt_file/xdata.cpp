@@ -49,8 +49,8 @@ void* XData::New(const uint64_t mem_size)
 	}
 
 	data_ = mem_pool_->allocate(mem_size);
-	this->mem_size_ = mem_size;
-	this->size_ = mem_size;
+	mem_size_ = data_ ? mem_size : 0;
+	size_ = data_ ? mem_size : 0;
 	return data_;
 }
 

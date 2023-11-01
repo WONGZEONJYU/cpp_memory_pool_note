@@ -34,6 +34,14 @@ public:
 	}
 
 	/// <summary>
+	/// 返回实际数据字节数
+	/// </summary>
+	/// <returns></returns>
+	uint64_t size() const { 
+		return size_; 
+	}
+
+	/// <summary>
 	/// 创建XData智能指针对象
 	/// </summary>
 	/// <param name="pool"></param>
@@ -46,7 +54,7 @@ private:
 	void _Move(XData&& obj);
 	void* data_{};
 	uint64_t size_{};/*数据字节数*/
-	uint64_t mem_size_{};/*占用空间字节数*/
+	uint64_t mem_size_{};/*内存空间字节数*/
 	_sp_mrs_type mem_pool_;
 };
 

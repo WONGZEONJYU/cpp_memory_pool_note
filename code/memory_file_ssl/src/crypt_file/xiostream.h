@@ -4,6 +4,8 @@
 #include <thread>
 #include <memory>
 #include <memory_resource>
+#include <list>
+#include "xdata.h"
 
 class XIOStream
 {
@@ -14,6 +16,8 @@ class XIOStream
 
 public:
 	using _sp_mrs_type = std::shared_ptr<std::pmr::memory_resource>;
+	using _sp_xios_type = std::shared_ptr<XIOStream>;
+	using _sp_xdata_type = std::shared_ptr<XData>;
 	/// <summary>
 	/// 线程启动
 	/// </summary>
@@ -34,6 +38,22 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	void set_mem_pool(const _sp_mrs_type&);
+
+	/// <summary>
+	/// 设置责任链下一个节点
+	/// </summary>
+	/// <param name="next"></param>
+	void set_next(const _sp_xios_type& next) {
+		next_ = next;
+	}
+
+	/// <summary>
+	/// 给对象传递数据,线程安全
+	/// </summary>
+	/// <param name=""></param>
+	void PushBack(const _sp_xdata_type& );
+
+	_sp_xdata_type PopFront();
 
 protected:
 
@@ -61,12 +81,22 @@ protected:
 	/// <returns></returns>
 	uint64_t xs_data_byte() const;
 
+	/// <summary>
+	/// 内存池
+	/// </summary>
 	_sp_mrs_type mem_pool_;
 
+	/// <summary>
+	/// 责任链代码
+	/// </summary>
+	_sp_xios_type next_;
+
 private:
-	std::thread th_;
 	bool is_exit_{};
 	uint64_t data_byte_{};
+	std::thread th_;
+	std::list<_sp_xdata_type> datas_;
+	std::mutex mux_;
 };
 
 #endif

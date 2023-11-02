@@ -43,9 +43,7 @@ public:
 	/// 设置责任链下一个节点
 	/// </summary>
 	/// <param name="next"></param>
-	void set_next(const _sp_xios_type& next) {
-		next_ = next;
-	}
+	void set_next(const _sp_xios_type& next);
 
 	/// <summary>
 	/// 给对象传递数据,线程安全
@@ -56,7 +54,6 @@ public:
 	_sp_xdata_type PopFront();
 
 protected:
-
 	explicit XIOStream() = default;
 	/// <summary>
 	/// 线程入口函数

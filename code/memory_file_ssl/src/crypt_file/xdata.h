@@ -15,7 +15,6 @@ public:
 	using _sp_xdata_type = std::shared_ptr<XData>;
 
 	XData(XData&& ) noexcept;
-	
 	XData& operator=(XData&& ) noexcept;
 
 	/// <summary>
@@ -41,6 +40,16 @@ public:
 		return size_; 
 	}
 
+	auto data() const { return data_; }
+
+	constexpr bool end() const {
+		return end_;
+	}
+
+	void set_end(const bool e) {
+		end_ = e;
+	}
+
 	/// <summary>
 	/// 创建XData智能指针对象
 	/// </summary>
@@ -53,6 +62,7 @@ public:
 private:
 	void _Move(XData&& obj);
 	void* data_{};
+	bool end_{};
 	uint64_t size_{};/*数据字节数*/
 	uint64_t mem_size_{};/*内存空间字节数*/
 	_sp_mrs_type mem_pool_;

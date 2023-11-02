@@ -11,13 +11,21 @@ static inline void XCrypt_t();
 
 int main(int argc, char* argv[])
 {
+	std::string password("12345678");
+
+	/*创建内存池*/
 	auto mp{make_shared<synchronized_pool_resource>()};
 
+	/*创建IO读线程*/
 	auto rt{make_shared<XReadTask>()};
 	rt->Init("../../bin/x86/img/test.png");
 	rt->set_mem_pool(mp);
 
+	/*创建解密线程*/
 	auto ct{make_shared<XCryptTask>()};
+	ct->Init(password);
+	ct->set_mem_pool(mp);
+	/*设置下一责任链*/
 	rt->set_next(ct);
 	
 	rt->Start();

@@ -41,8 +41,16 @@ uint64_t XIOStream::xs_data_byte() const {
 	return data_byte_;
 }
 
+/// <summary>
+/// …Ë÷√ƒ⁄¥Ê≥ÿ
+/// </summary>
+/// <param name=""></param>
 void XIOStream::set_mem_pool(const _sp_mrs_type& p) {
 	mem_pool_ = p;
+}
+
+void XIOStream::set_next(const _sp_xios_type& next) {
+	next_ = next;
 }
 
 /// <summary>

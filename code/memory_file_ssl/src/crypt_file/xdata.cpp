@@ -13,6 +13,7 @@ XData::_sp_xdata_type XData::Make(const _sp_mrs_type& pool)
 {
 	_sp_xdata_type ptr{ new XData() };
 	ptr->mem_pool_ = pool;
+	//cout << "+" << flush;
 	return ptr;
 }
 
@@ -64,6 +65,7 @@ XData::~XData()
 	mem_pool_->deallocate(data_, mem_size_);
 	data_ = nullptr;
 	size_ = 0;
+	//cout << "-" << flush;
 }
 
 void XData::_Move(XData&& obj)
@@ -72,6 +74,7 @@ void XData::_Move(XData&& obj)
 	size_ = obj.size_;
 	mem_size_ = obj.mem_size_;
 	mem_pool_ = move(obj.mem_pool_);
+
 	obj.data_ = nullptr;
 	obj.size_ = 0;
 	obj.mem_size_ = 0;

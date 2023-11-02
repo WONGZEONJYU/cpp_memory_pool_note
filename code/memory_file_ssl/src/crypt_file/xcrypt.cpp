@@ -3,6 +3,16 @@
 
 using namespace std;
 
+size_t XCrypt::Getpadding(const size_t _datasize)
+{
+    constexpr auto block_size{ sizeof(const_DES_cblock) };
+
+    auto const over{ _datasize % block_size },
+       padding{ block_size - over };
+
+    return padding ? padding : block_size;
+}
+
 XCrypt::XCrypt(std::string password)
 {
     Init(std::move(password));
@@ -17,8 +27,9 @@ bool XCrypt::Init(string password)
     if (key_size > sizeof(key)){ /*¶àÓà¶ªÆú*/
         key_size = sizeof(key);
     }
+
     memcpy(key, password.c_str(), key_size);
-    (void)DES_set_key(&key, &key_sch_);
+    DES_set_key(&key, &key_sch_);
     return true;
 }
 
@@ -137,3 +148,5 @@ size_t XCrypt::Decrypt(const char* in_data, const size_t insize, char* out_data,
 
     return write_size;
 }
+
+

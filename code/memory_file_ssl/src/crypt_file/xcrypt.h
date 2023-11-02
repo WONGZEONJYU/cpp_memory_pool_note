@@ -41,8 +41,16 @@ public:
 	size_t Decrypt(const char* in_data, size_t insize,
 		char* out_data,bool is_end = false);
 
+	/// <summary>
+	/// 获取需要填充的数据字节数
+	/// </summary>
+	/// <param name=""></param>
+	/// <returns></returns>
+	size_t Getpadding(size_t);
+
+private:
 	/*存储密钥*/
-	DES_key_schedule key_sch_{};
+	DES_key_schedule key_sch_ {};
 };
 
 #endif

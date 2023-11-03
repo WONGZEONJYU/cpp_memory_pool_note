@@ -53,3 +53,4 @@ void XWriteTask::Main()
 	ofs_.close();
 	cout << "end " << __FUNCTION__ << "\n";
 }
+

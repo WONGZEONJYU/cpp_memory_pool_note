@@ -73,3 +73,4 @@ XIOStream::_sp_xdata_type XIOStream::PopFront()
 	datas_.pop_front();
 	return re;
 }
+

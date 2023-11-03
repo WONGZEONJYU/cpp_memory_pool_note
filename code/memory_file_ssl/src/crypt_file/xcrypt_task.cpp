@@ -6,10 +6,14 @@ using namespace std;
 using namespace chrono;
 using namespace this_thread;
 
+XCryptTask::XCryptTask(std::string password)
+{
+	Init(move(password));
+}
+
 void XCryptTask::Init(std::string password)
 {
-	enc_ = make_shared<XCrypt>(password);
-	//enc_->Init(password);
+	enc_ = make_shared<XCrypt>(move(password));
 }
 
 void XCryptTask::Main()
@@ -41,7 +45,7 @@ void XCryptTask::Main()
 
 		out->set_size(dst_data_size);
 
-		cout << "<" << out->size() << ">" << flush;
+		//cout << "<" << out->size() << ">" << flush;
 		out->set_end(data->end());
 
 		if (next_){
@@ -52,5 +56,6 @@ void XCryptTask::Main()
 			break;
 		}
 	}
+
 	cout << "end " << __FUNCTION__ << "\n";
 }

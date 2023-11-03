@@ -8,6 +8,8 @@ class XCryptTask: public XIOStream
 {
 public:
 	using _sp_XCrypt_type = std::shared_ptr<XCrypt>;
+	explicit XCryptTask() = default;
+	explicit XCryptTask(std::string password);
 	void Init(std::string password);
 
 private:

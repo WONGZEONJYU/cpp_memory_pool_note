@@ -2,12 +2,13 @@
 #define XREADTASK_H_
 
 #include "xiostream.h"
-#include <string>
 #include <fstream>
 
 class XReadTask : public XIOStream
 {
 public:
+	explicit XReadTask() = default;
+	explicit XReadTask(std::string filename);
 	/// <summary>
 	/// 初始化读取线程,获取文件大小
 	/// </summary>

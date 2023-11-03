@@ -33,6 +33,9 @@
     <ClCompile Include="xcrypt_task.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="xwrite_task.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xcrypt.h">
@@ -48,6 +51,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="xcrypt_task.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xwrite_task.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

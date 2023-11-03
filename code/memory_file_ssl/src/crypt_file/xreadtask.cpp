@@ -8,6 +8,11 @@ using namespace std;
 using namespace chrono;
 using namespace this_thread;
 
+XReadTask::XReadTask(string filename)
+{
+	Init(move(filename));
+}
+
 /// <summary>
 /// 初始化读取线程,获取文件大小
 /// </summary>
@@ -18,7 +23,8 @@ bool XReadTask::Init(string filename)
 	if (filename.empty()){
 		return false;
 	}
-	
+
+	ifs_.close();
 	ifs_.open(filename, ios::binary);
 
 	if (!ifs_){
@@ -26,7 +32,7 @@ bool XReadTask::Init(string filename)
 		return false;
 	}
 
-	cout << "open succcess!\n";
+	cout << filename <<" open succcess!\n";
 
 	ifs_.seekg(0, ios::end);/*Move to end of file*/
 
@@ -75,7 +81,7 @@ void XReadTask::Main()
 			next_->PushBack(data);
 		}
 	}
-
+	ifs_.close();
 	cout << "\nend " << __FUNCTION__ << "\n";
 }
 

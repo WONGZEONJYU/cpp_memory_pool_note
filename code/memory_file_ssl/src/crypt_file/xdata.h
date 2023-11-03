@@ -28,24 +28,32 @@ public:
 	/// 设置实际数据字节数
 	/// </summary>
 	/// <param name=""></param>
-	void set_size(const uint64_t s) {
-		size_ = s;
-	}
+	void set_size(const uint64_t s) {size_ = s;}
 
 	/// <summary>
 	/// 返回实际数据字节数
 	/// </summary>
 	/// <returns></returns>
-	uint64_t size() const { 
-		return size_; 
-	}
+	uint64_t size() const { return size_; }
 
+	/// <summary>
+	/// 返回数据裸指针
+	/// </summary>
+	/// <returns></returns>
 	auto data() const { return data_; }
 
-	constexpr bool end() const {
+	/// <summary>
+	/// 是否为数据最后一组数据
+	/// </summary>
+	/// <returns></returns>
+	bool end() const {
 		return end_;
 	}
 
+	/// <summary>
+	/// 设置为最后一组数据
+	/// </summary>
+	/// <param name="e"></param>
 	void set_end(const bool e) {
 		end_ = e;
 	}
@@ -62,7 +70,7 @@ public:
 private:
 	void _Move(XData&& obj);
 	void* data_{};
-	bool end_{};
+	std::atomic<bool> end_{};
 	uint64_t size_{};/*数据字节数*/
 	uint64_t mem_size_{};/*内存空间字节数*/
 	_sp_mrs_type mem_pool_;

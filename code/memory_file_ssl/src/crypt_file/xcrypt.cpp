@@ -49,7 +49,8 @@ size_t XCrypt::Encrypt(const char* in_data, const size_t insize, char* out_data,
         return 0;
     }
 
-    const auto block_size{ sizeof(const_DES_cblock) }, over{ insize % block_size },
+    constexpr auto block_size{ sizeof(const_DES_cblock) };
+    const auto over{ insize % block_size },
         padding{ block_size - over };
 
     size_t write_size{}, data_size{};
@@ -104,7 +105,8 @@ size_t XCrypt::Decrypt(const char* in_data, const size_t insize, char* out_data,
         return 0;
     }
 
-    const auto block_size{ sizeof(const_DES_cblock) }, over{ insize % block_size },
+    constexpr auto block_size{ sizeof(const_DES_cblock) };
+    const auto over{ insize % block_size },
         padding{ block_size - over };
 
     size_t write_size{}, data_size{};

@@ -51,20 +51,20 @@ public:
 	/// <param name=""></param>
 	void PushBack(const _sp_xdata_type& );
 
-	_sp_xdata_type PopFront();
-
 protected:
+
 	explicit XIOStream() = default;
 	/// <summary>
 	/// 线程入口函数
 	/// </summary>
 	virtual void Main() {}
 
+	_sp_xdata_type PopFront();
 	/// <summary>
 	/// 
 	/// </summary>
 	/// <returns></returns>
-	constexpr bool is_exit() const noexcept { return is_exit_; };
+	bool is_exit() const noexcept { return is_exit_; };
 
 	/// <summary>
 	/// 保存文件大小
@@ -89,7 +89,7 @@ protected:
 	_sp_xios_type next_;
 
 private:
-	bool is_exit_{};
+	std::atomic<bool> is_exit_{};
 	uint64_t data_byte_{};
 	std::thread th_;
 	std::list<_sp_xdata_type> datas_;

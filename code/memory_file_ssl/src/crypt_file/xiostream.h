@@ -50,6 +50,7 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	void PushBack(const _sp_xdata_type& );
+	void PushBack(_sp_xdata_type&&);
 
 protected:
 
@@ -57,7 +58,7 @@ protected:
 	/// <summary>
 	/// 线程入口函数
 	/// </summary>
-	virtual void Main() {}
+	virtual void Main() = 0;
 
 	_sp_xdata_type PopFront();
 	/// <summary>
@@ -76,7 +77,7 @@ protected:
 	/// 获取文件大小
 	/// </summary>
 	/// <returns></returns>
-	uint64_t xs_data_byte() const;
+	uint64_t data_byte() const;
 
 	/// <summary>
 	/// 内存池

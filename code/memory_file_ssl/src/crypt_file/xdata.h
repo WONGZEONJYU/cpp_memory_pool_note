@@ -34,29 +34,25 @@ public:
 	/// 返回实际数据字节数
 	/// </summary>
 	/// <returns></returns>
-	uint64_t size() const { return size_; }
+	constexpr auto size() const { return size_; }
 
 	/// <summary>
 	/// 返回数据裸指针
 	/// </summary>
 	/// <returns></returns>
-	auto data() const { return data_; }
+	constexpr auto data() const { return data_; }
 
 	/// <summary>
 	/// 是否为数据最后一组数据
 	/// </summary>
 	/// <returns></returns>
-	bool end() const {
-		return end_;
-	}
+	bool end() const {return end_;}
 
 	/// <summary>
 	/// 设置为最后一组数据
 	/// </summary>
 	/// <param name="e"></param>
-	void set_end(const bool e) {
-		end_ = e;
-	}
+	void set_end(const bool e) {end_ = e;}
 
 	/// <summary>
 	/// 创建XData智能指针对象

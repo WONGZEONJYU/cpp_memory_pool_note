@@ -40,7 +40,7 @@ bool XReadTask::Init(string filename)
 
 	ifs_.seekg(0, ios::beg); /*Move to beginning of file*/
 
-	cout << "file size = " << xs_data_byte() << "\n";
+	cout << "file size = " << data_byte() << "\n";
 
 	return true;
 }
@@ -75,12 +75,13 @@ void XReadTask::Main()
 			data->set_end(true);
 		}
 
-		//cout << "[" << t_size << "] " << flush;
-
 		if (next_) {	/*读取完成,数据传递给下一责任链*/
-			next_->PushBack(data);
+			next_->PushBack(move(data));
 		}
+
+		cout << "[" << t_size << "] " << flush;
 	}
+
 	ifs_.close();
 	cout << "\nend " << __FUNCTION__ << "\n";
 }

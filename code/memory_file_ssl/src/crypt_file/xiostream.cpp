@@ -37,7 +37,7 @@ void XIOStream::Ass_data_byte(const uint64_t n) {
 /// 获取文件大小
 /// </summary>
 /// <returns></returns>
-uint64_t XIOStream::xs_data_byte() const {
+uint64_t XIOStream::data_byte() const {
 	return data_byte_;
 }
 
@@ -63,14 +63,21 @@ void XIOStream::PushBack(const _sp_xdata_type& _data) {
 	/*考虑最大列表问题?*/
 }
 
+void XIOStream::PushBack(_sp_xdata_type&& _data) {
+	unique_lock<mutex> lock(mux_);
+	datas_.push_back(move(_data));
+	/*考虑最大列表问题?*/
+}
+
 XIOStream::_sp_xdata_type XIOStream::PopFront()
 {
 	unique_lock<mutex> lock(mux_);
+
 	if (datas_.empty()){
 		return {};
 	}
+
 	const auto re{ datas_.front() };
 	datas_.pop_front();
 	return re;
 }
-

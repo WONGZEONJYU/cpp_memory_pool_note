@@ -70,11 +70,13 @@ XData::~XData()
 
 void XData::_Move(XData&& obj)
 {
+	end_.store(obj.end_);
 	data_ = obj.data_;
 	size_ = obj.size_;
 	mem_size_ = obj.mem_size_;
 	mem_pool_ = move(obj.mem_pool_);
-
+	
+	obj.end_ = false;
 	obj.data_ = nullptr;
 	obj.size_ = 0;
 	obj.mem_size_ = 0;

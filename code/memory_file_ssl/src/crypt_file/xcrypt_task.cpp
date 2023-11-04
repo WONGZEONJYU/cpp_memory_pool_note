@@ -6,14 +6,14 @@ using namespace std;
 using namespace chrono;
 using namespace this_thread;
 
-XCryptTask::XCryptTask(std::string password)
+XCryptTask::XCryptTask(string password , const bool b) :
+	enc_{ move(make_shared<XCrypt>(move(password)))}, is_encrypt_{move(b)}
 {
-	Init(move(password));
 }
 
-void XCryptTask::Init(std::string password)
+void XCryptTask::Init(string password)
 {
-	enc_ = make_shared<XCrypt>(move(password));
+	enc_ = move(make_shared<XCrypt>(move(password)));
 }
 
 void XCryptTask::Main()
@@ -22,37 +22,47 @@ void XCryptTask::Main()
 
 	while (!is_exit()){
 
-		auto data{ PopFront() };
+		auto src_data{ PopFront() };
 
-		if (!data){
+		if (!src_data){
 			sleep_for(milliseconds(10));
 			//cout << "== " << flush;
 			continue;
 		}
 
-		auto out{ XData::Make(mem_pool_) };
+		auto out_data { XData::Make(mem_pool_) };
 
 		/*源文件大小*/
-		const auto src_data_size{ data->size() };
+		const auto src_data_size{ src_data->size() };
 
 		/*补位后的文件大小*/
 		const auto outsize{ src_data_size + enc_->Getpadding(src_data_size)};
 
-		out->New(outsize);
+		auto dst { out_data->New(outsize) };
 
-		auto dst_data_size { enc_->Encrypt(static_cast<const char*>(data->data()), src_data_size,
-			static_cast<char*>(out->data()))};
+		size_t dst_data_size {};
 
-		out->set_size(dst_data_size);
+		const auto is_end { src_data->end() };
 
-		//cout << "<" << out->size() << ">" << flush;
-		out->set_end(data->end());
-
-		if (next_){
-			next_->PushBack(out);
+		if (is_encrypt_) {
+			dst_data_size = { enc_->Encrypt(static_cast<const char*>(src_data->data()), 
+						src_data_size,static_cast<char*>(dst),is_end) };
+		}else{
+			dst_data_size = { enc_->Decrypt(static_cast<const char*>(src_data->data()),
+						src_data_size,
+			static_cast<char*>(dst),is_end) };
 		}
 
-		if (data->end()){
+		out_data->set_size(dst_data_size);
+		out_data->set_end(is_end);
+
+		cout << "<" << out_data->size() << ">" << flush;
+
+		if (next_){
+			next_->PushBack(move(out_data));
+		}
+
+		if (is_end){
 			break;
 		}
 	}

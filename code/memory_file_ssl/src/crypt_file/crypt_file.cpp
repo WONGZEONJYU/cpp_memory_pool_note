@@ -2,9 +2,7 @@
 #include <memory>
 #include <memory_resource>
 #include "xcrypt.h"
-#include "xreadtask.h"
-#include "xcrypt_task.h"
-#include "xwrite_task.h"
+#include "xfile_crypt.h"
 
 using namespace std;
 using namespace pmr;
@@ -15,69 +13,17 @@ int main(int argc, char* argv[])
 	std::string password("12345678");
 
 	{
-		/*创建内存池*/
-		auto mp{ make_shared<synchronized_pool_resource>() };
+		auto xfc{ make_shared<XFileCrypt>("../../bin/x86/img/11test.png", 
+			"../../bin/x86/en_1test.png",
+			password) };
+		xfc->Start();
+		xfc->Wait();
 
-		/*创建IO读线程*/
-		auto rt{ make_shared<XReadTask>("../../bin/x86/img/test.png") };
-		//rt->Init("../../bin/x86/img/test.png");
-		rt->set_mem_pool(mp);
-
-		/*创建解密线程*/
-		auto ct{ make_shared<XCryptTask>(password) };
-		//ct->Init(password);
-		ct->set_mem_pool(mp);
-
-		/*设置下一责任链*/
-		rt->set_next(ct);
-
-		/*创建IO写线程*/
-		auto wt{ make_shared<XWriteTask>("../../bin/x86/en_test_out.png") };
-		wt->set_mem_pool(mp);
-
-		/*设置下一责任链*/
-		ct->set_next(wt);
-
-		rt->Start();
-		ct->Start();
-		wt->Start();
-
-		rt->Wait();
-		ct->Wait();
-		wt->Wait();
-	}
-
-	{
-		/*创建内存池*/
-		auto mp{ make_shared<synchronized_pool_resource>() };
-
-		/*创建IO读线程*/
-		auto rt{ make_shared<XReadTask>("../../bin/x86/en_test_out.png") };
-		//rt->Init("../../bin/x86/img/test.png");
-		rt->set_mem_pool(mp);
-
-		/*创建解密线程*/
-		auto ct{ make_shared<XCryptTask>(password,false) };
-		//ct->Init(password);
-		ct->set_mem_pool(mp);
-
-		/*设置下一责任链*/
-		rt->set_next(ct);
-
-		/*创建IO写线程*/
-		auto wt{ make_shared<XWriteTask>("../../bin/x86/de_test_out.png") };
-		wt->set_mem_pool(mp);
-
-		/*设置下一责任链*/
-		ct->set_next(wt);
-
-		rt->Start();
-		ct->Start();
-		wt->Start();
-
-		rt->Wait();
-		ct->Wait();
-		wt->Wait();
+/*		auto xfd{ make_shared<XFileCrypt>("../../bin/x86/en_1test.png",
+			"../../bin/x86/de_1test.png",
+			password,false) };
+		xfd->Start();
+		xfd->Wait()*/;
 	}
 
 	(void)getchar();

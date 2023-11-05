@@ -24,7 +24,7 @@
     <ClCompile Include="xiostream.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="xreadtask.cpp">
+    <ClCompile Include="xread_task.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="xdata.cpp">
@@ -36,6 +36,12 @@
     <ClCompile Include="xwrite_task.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="xfile_crypt.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="x_exception.cpp">
+      <Filter>头文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xcrypt.h">
@@ -44,7 +50,7 @@
     <ClInclude Include="xiostream.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="xreadtask.h">
+    <ClInclude Include="xread_task.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="xdata.h">
@@ -54,6 +60,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="xwrite_task.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="xfile_crypt.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="x_exception.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

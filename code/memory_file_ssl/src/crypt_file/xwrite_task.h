@@ -14,6 +14,7 @@ public:
 private:
 	void Main() override;
 	std::ofstream ofs_;
+	std::string filename_;
 };
 
 #endif

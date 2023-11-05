@@ -1,5 +1,5 @@
-#ifndef XREADTASK_H_
-#define XREADTASK_H_
+#ifndef XREA_DTASK_H_
+#define XREA_DTASK_H_
 
 #include "xiostream.h"
 #include <fstream>
@@ -14,7 +14,7 @@ public:
 	/// </summary>
 	/// <param name="filename"></param>
 	/// <returns></returns>
-	bool Init(std::string filename);
+	bool Init(std::string filename) ;
 
 private:
 	/// <summary>

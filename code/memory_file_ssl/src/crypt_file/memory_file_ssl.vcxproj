@@ -74,7 +74,7 @@
     <OutDir>..\..\bin\x86</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\..\bin\x86</OutDir>
+    <OutDir>..\..\bin\x86\</OutDir>
     <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -85,12 +85,12 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>../../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../include/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../lib/x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../lib/x86/</AdditionalLibraryDirectories>
       <AdditionalDependencies>libcrypto.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -148,17 +148,21 @@
     <ClCompile Include="xcrypt.cpp" />
     <ClCompile Include="xcrypt_task.cpp" />
     <ClCompile Include="xdata.cpp" />
+    <ClCompile Include="xfile_crypt.cpp" />
     <ClCompile Include="xiostream.cpp" />
-    <ClCompile Include="xreadtask.cpp" />
+    <ClCompile Include="xread_task.cpp" />
     <ClCompile Include="xwrite_task.cpp" />
+    <ClCompile Include="x_exception.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="xcrypt.h" />
     <ClInclude Include="xcrypt_task.h" />
     <ClInclude Include="xdata.h" />
+    <ClInclude Include="xfile_crypt.h" />
     <ClInclude Include="xiostream.h" />
-    <ClInclude Include="xreadtask.h" />
+    <ClInclude Include="xread_task.h" />
     <ClInclude Include="xwrite_task.h" />
+    <ClInclude Include="x_exception.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

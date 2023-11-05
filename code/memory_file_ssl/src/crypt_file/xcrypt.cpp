@@ -21,6 +21,10 @@ XCrypt::XCrypt(std::string password)
 /*初始化密钥 , DES加密算法 密钥最多8bit 多余丢弃不足补0*/
 bool XCrypt::Init(string password)
 {
+    if (true) {
+        
+    }
+
     const_DES_cblock key{}; /*不足补0,初始化就置0*/
     auto key_size{ password.size()};
 

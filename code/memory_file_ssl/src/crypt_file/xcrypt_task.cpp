@@ -22,11 +22,11 @@ void XCryptTask::Main()
 
 	while (!is_exit()){
 
-		auto src_data{ PopFront() };
+		auto src_data { PopFront() };
 
-		if (!src_data){
+		if (!src_data) {
+			cout << __FUNCTION__ << " src_data is empty\n" << flush;
 			sleep_for(milliseconds(10));
-			//cout << "== " << flush;
 			continue;
 		}
 
@@ -47,16 +47,15 @@ void XCryptTask::Main()
 		if (is_encrypt_) {
 			dst_data_size = { enc_->Encrypt(static_cast<const char*>(src_data->data()), 
 						src_data_size,static_cast<char*>(dst),is_end) };
-		}else{
+		}else {
 			dst_data_size = { enc_->Decrypt(static_cast<const char*>(src_data->data()),
-						src_data_size,
-			static_cast<char*>(dst),is_end) };
+						src_data_size,static_cast<char*>(dst),is_end) };
 		}
 
 		out_data->set_size(dst_data_size);
 		out_data->set_end(is_end);
 
-		cout << "<" << out_data->size() << ">" << flush;
+		//cout << "<" << out_data->size() << ">" << flush;
 
 		if (next_){
 			next_->PushBack(move(out_data));
@@ -67,5 +66,5 @@ void XCryptTask::Main()
 		}
 	}
 
-	cout << "end " << __FUNCTION__ << "\n";
+	cout << "\nend " << __FUNCTION__ << "\n";
 }

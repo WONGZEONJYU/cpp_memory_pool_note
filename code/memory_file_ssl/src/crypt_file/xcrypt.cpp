@@ -1,5 +1,6 @@
 #include "xcrypt.h"
 #include <iostream>
+#include "x_exception.h"
 
 using namespace std;
 
@@ -13,16 +14,11 @@ size_t XCrypt::Getpadding(const size_t _datasize)
     return padding ? padding : block_size;
 }
 
-XCrypt::XCrypt(std::string password)
-{
-    Init(std::move(password));
-}
-
 /*初始化密钥 , DES加密算法 密钥最多8bit 多余丢弃不足补0*/
-bool XCrypt::Init(string password)
+void XCrypt::Init(string password) noexcept(false)
 {
-    if (true) {
-        
+    if (password.empty()){
+        throw XException(string(__FUNCTION__) + "password is empty!\n");
     }
 
     const_DES_cblock key{}; /*不足补0,初始化就置0*/
@@ -34,7 +30,6 @@ bool XCrypt::Init(string password)
 
     memcpy(key, password.c_str(), key_size);
     DES_set_key(&key, &key_sch_);
-    return true;
 }
 
 /// <summary>
@@ -47,10 +42,11 @@ bool XCrypt::Init(string password)
 /// <returns>0 or size 返回加密后数据大小, 有可能大于输入 , 添加补充</returns>
 /// 
 /// 
-size_t XCrypt::Encrypt(const char* in_data, const size_t insize, char* out_data, const bool is_end)
+size_t XCrypt::Encrypt(const char* in_data, const size_t insize,
+    char* out_data, const bool is_end) noexcept(false)
 {
     if ((!in_data) || (!out_data) || (insize <= 0)) {
-        return 0;
+        throw XException(string(__FUNCTION__) + "pointer or size is empty!\n");
     }
 
     constexpr auto block_size{ sizeof(const_DES_cblock) };
@@ -103,10 +99,11 @@ size_t XCrypt::Encrypt(const char* in_data, const size_t insize, char* out_data,
 /// <param name="is_end">是否到加密结尾</param>
 /// <returns>-1 or size 返回解密后数据大小 , 有可能小于输入 , 去掉补充</returns>
 
-size_t XCrypt::Decrypt(const char* in_data, const size_t insize, char* out_data, const bool is_end)
+size_t XCrypt::Decrypt(const char* in_data, const size_t insize, 
+    char* out_data, const bool is_end) noexcept(false)
 {
     if ((!in_data) || (!out_data) || (insize <= 0)) {
-        return 0;
+        throw XException(string(__FUNCTION__) + "pointer or size is empty!\n");
     }
 
     constexpr auto block_size{ sizeof(const_DES_cblock) };

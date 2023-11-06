@@ -8,8 +8,7 @@ class XWriteTask : public XIOStream
 {
 public:
 	explicit XWriteTask() = default;
-	explicit XWriteTask(std::string filename);
-	bool Init(std::string filename);
+	void Init(std::string filename) noexcept(false);
 
 private:
 	void Main() override;

@@ -13,14 +13,11 @@ class XFileCrypt final
 	XFileCrypt& operator=(const XFileCrypt&) = delete;
 public:
 	explicit XFileCrypt() = default;
-	explicit XFileCrypt(std::string infile, std::string outfile,
-		std::string passwd, bool is_encrpty = true);
+	void Init(std::string infile, std::string outfile,
+		std::string passwd, bool is_encrpty = true) noexcept(false);
 
-	bool Init(std::string infile, std::string outfile,
-		std::string passwd, bool is_encrpty = true);
-
-	void Start();
-	void Wait();
+	void Start() noexcept(false);
+	void Wait() noexcept(false);
 private:
 	std::shared_ptr<XReadTask> rt_;
 	std::shared_ptr<XCryptTask> ct_;

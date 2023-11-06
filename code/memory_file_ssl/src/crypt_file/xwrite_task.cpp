@@ -1,33 +1,27 @@
 #include "xwrite_task.h"
 #include <iostream>
+#include "x_exception.h"
+
 using namespace std;
 using namespace chrono;
 using namespace this_thread;
 
-XWriteTask::XWriteTask(string filename)
-{
-	Init(move(filename));
-}
-
-bool XWriteTask::Init(string filename)
+void XWriteTask::Init(string filename) noexcept(false)
 {
 	if (filename.empty()) {
-		cerr << "filename empty\n";
-		throw;
-		return false;
+		throw XException(move(string(__FUNCTION__) + "filename is empty!\n"));
 	}
 
 	ofs_.close();
 	ofs_.open(filename, ios::binary);
 
 	if (!ofs_){
-		cerr << "open file " << filename << " failed!\n";
-		return false;
+		throw XException(move(string(__FUNCTION__) + " open file " + filename + " failed!\n"));
 	}
 
 	cout << filename << " open success!\n";
+
 	filename_ = move(filename);
-	return true;
 }
 
 void XWriteTask::Main()

@@ -10,8 +10,7 @@ class XCryptTask: public XIOStream
 public:
 	using _sp_XCrypt_type = std::shared_ptr<XCrypt>;
 	explicit XCryptTask() = default;
-	explicit XCryptTask(std::string password, bool = true);
-	void Init(std::string password);
+	void Init(std::string password, bool = true) noexcept(false);
 	void set_is_encrypt(const bool b = true) { is_encrypt_ = b; }
 
 private:

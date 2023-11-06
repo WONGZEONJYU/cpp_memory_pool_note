@@ -2,37 +2,29 @@
 #include <iostream>
 #include <thread>
 #include <memory_resource>
-#include <exception>
+#include "x_exception.h"
 #include "xdata.h"
 
 using namespace std;
 using namespace chrono;
 using namespace this_thread;
 
-XReadTask::XReadTask(string filename)
-{
-	Init(move(filename));
-}
-
 /// <summary>
 /// 初始化读取线程,获取文件大小
 /// </summary>
 /// <param name="filename"></param>
 /// <returns></returns>
-bool XReadTask::Init(string filename)
+void XReadTask::Init(string filename) noexcept(false)
 {
 	if (filename.empty()){
-		return false;
+		throw XException(string(__FUNCTION__) + " filename is empty!\n");
 	}
 	
 	ifs_.close();
 	ifs_.open(filename, ios::binary);
 
 	if (!ifs_){
-		const auto err{ "open file " + filename + " failed!\n" };
-		cerr << err;
-		throw exception(err.c_str());
-		return false;
+		throw XException(string(__FUNCTION__) + " open file : " + filename + " failed!\n");
 	}
 
 	cout << filename <<" open succcess!\n";
@@ -44,8 +36,6 @@ bool XReadTask::Init(string filename)
 	ifs_.seekg(0, ios::beg); /*Move to beginning of file*/
 
 	cout << "file size = " << data_byte() << "\n";
-
-	return true;
 }
 
 void XReadTask::Main()

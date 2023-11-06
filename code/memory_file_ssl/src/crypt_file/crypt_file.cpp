@@ -13,17 +13,23 @@ int main(int argc, char* argv[])
 	std::string password("12345678");
 
 	{
-		auto xfc{ make_shared<XFileCrypt>("../../bin/x86/img/11test.png", 
-			"../../bin/x86/en_1test.png",
-			password) };
+		auto xfc{ make_shared<XFileCrypt>( )};
+
+		xfc->Init("../../bin/x86/img/test.txt",
+			"../../bin/x86/en_test.txt",
+			password);
+
 		xfc->Start();
 		xfc->Wait();
 
-/*		auto xfd{ make_shared<XFileCrypt>("../../bin/x86/en_1test.png",
-			"../../bin/x86/de_1test.png",
-			password,false) };
+		auto xfd{ make_shared<XFileCrypt>() };
+
+		xfd->Init("../../bin/x86/en_test.txt",
+			"../../bin/x86/de_test.txt",
+			password, false);
+
 		xfd->Start();
-		xfd->Wait()*/;
+		xfd->Wait();
 	}
 
 	(void)getchar();

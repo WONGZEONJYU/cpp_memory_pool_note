@@ -8,13 +8,12 @@ class XReadTask : public XIOStream
 {
 public:
 	explicit XReadTask() = default;
-	explicit XReadTask(std::string filename);
 	/// <summary>
 	/// 初始化读取线程,获取文件大小
 	/// </summary>
 	/// <param name="filename"></param>
 	/// <returns></returns>
-	bool Init(std::string filename) ;
+	void Init(std::string filename) noexcept(false);
 
 private:
 	/// <summary>

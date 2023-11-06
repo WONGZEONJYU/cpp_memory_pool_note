@@ -6,14 +6,11 @@ using namespace std;
 using namespace chrono;
 using namespace this_thread;
 
-XCryptTask::XCryptTask(string password , const bool b) :
-	enc_{ move(make_shared<XCrypt>(move(password)))}, is_encrypt_{move(b)}
+void XCryptTask::Init(string password,const bool b) noexcept(false)
 {
-}
-
-void XCryptTask::Init(string password)
-{
-	enc_ = move(make_shared<XCrypt>(move(password)));
+	enc_ = move(make_shared<XCrypt>());
+	enc_->Init(move(password));
+	is_encrypt_ = b;
 }
 
 void XCryptTask::Main()

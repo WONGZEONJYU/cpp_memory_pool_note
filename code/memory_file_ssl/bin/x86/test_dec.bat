@@ -1,1 +1,1 @@
-crypt_file2.exe img_enc\test.png test4.png 123456 -d
+memory_file_ssl.exe ./en_out/ de_out 123456 -d

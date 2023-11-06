@@ -1,39 +1,102 @@
 #include <iostream>
 #include <memory>
-#include <memory_resource>
+#include <filesystem>
 #include "xcrypt.h"
 #include "xfile_crypt.h"
 
 using namespace std;
-using namespace pmr;
+using namespace filesystem;
+
 //static inline void XCrypt_t();
+
+static std::string toLower(std::string& str) {
+
+	std::transform(str.begin(), str.end(), str.begin(),
+		[](unsigned char c) {
+			return std::tolower(c);
+		});
+
+	return str;
+}
 
 int main(int argc, char* argv[])
 {
-	std::string password("12345678");
+	/*加密指令 输入文件 输出文件 密码 参数 -e*/
+	/*解密指令 输入文件 输出文件 密码 参数 -d*/
 
-	{
-		auto xfc{ make_shared<XFileCrypt>( )};
-
-		xfc->Init("../../bin/x86/img/test.txt",
-			"../../bin/x86/en_test.txt",
-			password);
-
-		xfc->Start();
-		xfc->Wait();
-
-		auto xfd{ make_shared<XFileCrypt>() };
-
-		xfd->Init("../../bin/x86/en_test.txt",
-			"../../bin/x86/de_test.txt",
-			password, false);
-
-		xfd->Start();
-		xfd->Wait();
+	if (argc < 5){
+		cerr << __LINE__ << "parm miss!\n";
+		(void)getchar();
+		return -1;
 	}
 
-	(void)getchar();
+	string in_file(argv[1]), out_file(argv[2]),
+		password(argv[3]),parm(argv[4]);
+
+	toLower(parm);
+
+	create_directory(out_file);
+
+	auto is_encrpyt{ true };
+
+	if (!parm.compare("-e")) {
+		//is_encrpyt = true;
+	}else if (!parm.compare("-d")){
+		is_encrpyt = false;
+	}else{
+		cerr << __LINE__ <<"parm error input -e or -d!\n";
+		return -1;
+	}
+
+	list<shared_ptr<XFileCrypt>> fes;
+
+	for (auto& p : directory_iterator(in_file)) {
+
+		if (!p.is_regular_file()) { /*只处理文件*/
+			continue;
+		}
+
+		auto fe{ make_shared<XFileCrypt>() };
+
+		auto out_f{ out_file + "\\" + p.path().filename().string() };
+
+		fe->Init(p.path().string(), move(out_f),
+			password, is_encrpyt);
+
+		fes.push_back(fe);
+		fe->Start();
+	}
+
+	for (auto &fe : fes){
+		fe->Wait();
+	}
+
+	getchar();
 	return 0;
+}
+
+static void Single_file_test()
+{
+	const std::string password("12345678");
+
+	auto xfc{ make_shared<XFileCrypt>() };
+
+	xfc->Init("../../bin/x86/img/test.txt",
+		"../../bin/x86/en_test.txt",
+		password);
+
+	xfc->Start();
+	xfc->Wait();
+
+	auto xfd{ make_shared<XFileCrypt>() };
+
+	xfd->Init("../../bin/x86/en_test.txt",
+		"../../bin/x86/de_test.txt",
+		password, false);
+
+	xfd->Start();
+	xfd->Wait();
+
 }
 
 static inline void XCrypt_t()

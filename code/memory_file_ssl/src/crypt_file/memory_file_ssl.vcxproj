@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="crypt_application.cpp" />
     <ClCompile Include="crypt_file.cpp" />
     <ClCompile Include="xcrypt.cpp" />
     <ClCompile Include="xcrypt_task.cpp" />
@@ -155,6 +156,7 @@
     <ClCompile Include="x_exception.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="crypt_application.h" />
     <ClInclude Include="xcrypt.h" />
     <ClInclude Include="xcrypt_task.h" />
     <ClInclude Include="xdata.h" />

@@ -37,7 +37,7 @@ void XCryptTask::Main()
 
 		auto dst { out_data->New(outsize) };
 
-		size_t dst_data_size {};
+		uint64_t dst_data_size {};
 
 		const auto is_end { src_data->end() };
 

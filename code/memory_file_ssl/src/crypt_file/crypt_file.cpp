@@ -1,78 +1,19 @@
 #include <iostream>
-#include <memory>
-#include <filesystem>
+#include "crypt_application.h"
 #include "xcrypt.h"
-#include "xfile_crypt.h"
 
 using namespace std;
-using namespace filesystem;
-
 //static inline void XCrypt_t();
 
-static std::string toLower(std::string& str) {
-
-	std::transform(str.begin(), str.end(), str.begin(),
-		[](unsigned char c) {
-			return std::tolower(c);
-		});
-
-	return str;
-}
-
-int main(int argc, char* argv[])
+int main(int argc,const char* argv[])
 {
 	/*加密指令 输入文件 输出文件 密码 参数 -e*/
 	/*解密指令 输入文件 输出文件 密码 参数 -d*/
 
-	if (argc < 5){
-		cerr << __LINE__ << "parm miss!\n";
-		(void)getchar();
-		return -1;
-	}
-
-	string in_file(argv[1]), out_file(argv[2]),
-		password(argv[3]),parm(argv[4]);
-
-	toLower(parm);
-
-	create_directory(out_file);
-
-	auto is_encrpyt{ true };
-
-	if (!parm.compare("-e")) {
-		//is_encrpyt = true;
-	}else if (!parm.compare("-d")){
-		is_encrpyt = false;
-	}else{
-		cerr << __LINE__ <<"parm error input -e or -d!\n";
-		return -1;
-	}
-
-	list<shared_ptr<XFileCrypt>> fes;
-
-	for (auto& p : directory_iterator(in_file)) {
-
-		if (!p.is_regular_file()) { /*只处理文件*/
-			continue;
-		}
-
-		auto fe{ make_shared<XFileCrypt>() };
-
-		auto out_f{ out_file + "\\" + p.path().filename().string() };
-
-		fe->Init(p.path().string(), move(out_f),
-			password, is_encrpyt);
-
-		fes.push_back(fe);
-		fe->Start();
-	}
-
-	for (auto &fe : fes){
-		fe->Wait();
-	}
-
-	getchar();
-	return 0;
+	auto a{ make_shared<Crypt_Application>(argc,argv) };
+	const auto r{ a->exec() };
+	(void)getchar();
+	return r;
 }
 
 static void Single_file_test()

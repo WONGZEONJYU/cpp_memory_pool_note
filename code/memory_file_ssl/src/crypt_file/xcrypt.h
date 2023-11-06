@@ -25,7 +25,7 @@ public:
 	 /// <param name="is_end">是否到加密结尾</param>
 	 /// <returns>0 or size 返回加密后数据大小, 有可能大于输入 , 添加补充</returns>
 
-	size_t Encrypt(const char* in_data,size_t insize,
+	uint64_t Encrypt(const char* in_data,uint64_t insize,
 		char* out_data, bool is_end = false) noexcept(false);
 
 	 /// <summary>
@@ -37,7 +37,7 @@ public:
 	 /// <param name="is_end">是否到加密结尾</param>
 	 /// <returns>-1 or size 返回解密后数据大小 , 有可能小于输入 , 去掉补充</returns>
 
-	size_t Decrypt(const char* in_data, size_t insize,
+	uint64_t Decrypt(const char* in_data, uint64_t insize,
 		char* out_data,bool is_end = false) noexcept(false);
 
 	/// <summary>
@@ -45,7 +45,7 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
-	size_t Getpadding(size_t);
+	uint64_t Getpadding(uint64_t);
 
 private:
 	/*存储密钥*/

@@ -49,7 +49,7 @@ void* XData::New(const uint64_t mem_size)
 		return {};
 	}
 
-	data_ = mem_pool_->allocate(mem_size);
+	data_ = mem_pool_->allocate(static_cast<size_t>(mem_size));
 	mem_size_ = data_ ? mem_size : 0;
 	size_ = data_ ? mem_size : 0;
 	return data_;
@@ -62,7 +62,7 @@ XData::~XData()
 	if (is_){
 		return;
 	}
-	mem_pool_->deallocate(data_, mem_size_);
+	mem_pool_->deallocate(data_, static_cast<uint32_t>(mem_size_));
 	data_ = nullptr;
 	size_ = 0;
 	//cout << "-" << flush;

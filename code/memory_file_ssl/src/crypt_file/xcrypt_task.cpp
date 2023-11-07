@@ -21,11 +21,11 @@ void XCryptTask::Main()
 
 		auto src_data { PopFront() };
 
-		if (!src_data) {
-			cout << __FUNCTION__ << " src_data is empty\n" << flush;
-			sleep_for(milliseconds(10));
-			continue;
-		}
+		//if (!src_data) {
+		//	cout << __FUNCTION__ << " src_data is empty\n" << flush;
+		//	sleep_for(milliseconds(10));
+		//	continue;
+		//}
 
 		auto out_data { XData::Make(mem_pool_) };
 

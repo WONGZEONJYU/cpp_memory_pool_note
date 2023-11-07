@@ -21,6 +21,7 @@ private:
 	/// </summary>
 	void Main() override;
 	std::ifstream ifs_;
+
 };
 
 #endif

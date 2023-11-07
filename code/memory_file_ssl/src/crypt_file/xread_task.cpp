@@ -17,17 +17,17 @@ using namespace this_thread;
 void XReadTask::Init(string filename) noexcept(false)
 {
 	if (filename.empty()){
-		throw XException(string(__FUNCTION__) + " filename is empty!\n");
+		throw XException(move(string(__FUNCTION__) + " filename is empty!\n"));
 	}
 	
 	ifs_.close();
 	ifs_.open(filename, ios::binary);
 
 	if (!ifs_){
-		throw XException(string(__FUNCTION__) + " open file : " + filename + " failed!\n");
+		throw XException(move(string(__FUNCTION__) + " open file : " + filename + " failed!\n"));
 	}
 
-	cout << filename <<" open succcess!\n";
+	cout << filename << " open succcess!\n";
 
 	ifs_.seekg(0, ios::end);/*Move to end of file*/
 

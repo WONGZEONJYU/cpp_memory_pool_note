@@ -13,7 +13,6 @@ class XIOStream
 	XIOStream(XIOStream&&) = delete;
 	XIOStream& operator=(const XIOStream&) = delete;
 	XIOStream& operator=(XIOStream&&) = delete;
-
 public:
 	using _sp_mrs_type = std::shared_ptr<std::pmr::memory_resource>;
 	using _sp_xios_type = std::shared_ptr<XIOStream>;
@@ -54,7 +53,7 @@ public:
 
 protected:
 
-	explicit XIOStream() = default;
+	explicit XIOStream();
 	/// <summary>
 	/// 线程入口函数
 	/// </summary>
@@ -95,6 +94,7 @@ private:
 	std::thread th_;
 	std::list<_sp_xdata_type> datas_;
 	std::mutex mux_;
+	const uint64_t list_max_;
 };
 
 #endif

@@ -1,6 +1,12 @@
 #include "xiostream.h"
 
 using namespace std;
+using namespace chrono;
+using namespace this_thread;
+
+XIOStream::XIOStream() :list_max_{ datas_.max_size() }
+{
+}
 
 /// <summary>
 /// 线程启动
@@ -58,26 +64,39 @@ void XIOStream::set_next(const _sp_xios_type& next) {
 /// </summary>
 /// <param name="_data"></param>
 void XIOStream::PushBack(const _sp_xdata_type& _data) {
+
+	while (datas_.size() >= list_max_) {
+		sleep_for(milliseconds(10));
+	}
 	unique_lock<mutex> lock(mux_);
 	datas_.push_back(_data);
 	/*考虑最大列表问题?*/
 }
 
 void XIOStream::PushBack(_sp_xdata_type&& _data) {
+
+	while (datas_.size() >= list_max_) {
+		sleep_for(milliseconds(10));
+	}
+
 	unique_lock<mutex> lock(mux_);
 	datas_.push_back(move(_data));
+
 	/*考虑最大列表问题?*/
 }
 
 XIOStream::_sp_xdata_type XIOStream::PopFront()
 {
-	unique_lock<mutex> lock(mux_);
-
-	if (datas_.empty()){
-		return {};
+	while (datas_.empty()){
+		sleep_for(milliseconds(10));
 	}
 
-	const auto re{ datas_.front() };
+	unique_lock<mutex> lock(mux_);
+	//if (datas_.empty()){
+	//	return {};
+	//}
+
+	const auto ret { datas_.front() };
 	datas_.pop_front();
-	return re;
+	return ret;
 }

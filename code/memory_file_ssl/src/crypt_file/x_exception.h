@@ -4,7 +4,7 @@
 #include <exception>
 #include <string>
 
-class XException : public std::exception
+class XException:public std::exception
 {
 public:
     XException(std::string err_message) noexcept:

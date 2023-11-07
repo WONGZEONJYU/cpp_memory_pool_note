@@ -32,17 +32,20 @@ void XWriteTask::Main()
 
 		const auto src_data{ PopFront() };
 
-		if (!src_data) {
-			cout << __FUNCTION__ << " src_data is empty\n" << flush;
-			sleep_for(milliseconds(10));
-			continue;
-		}
+		//if (!src_data) {
+		//	cout << __FUNCTION__ << " src_data is empty\n" << flush;
+		//	sleep_for(milliseconds(10));
+		//	continue;
+		//}
 
 		const auto t_size{ src_data->size() };
-		ofs_.write(static_cast<const char*>(src_data->data()), t_size);
+		const auto dst{ static_cast<const char*>(src_data->data())};
+
+		ofs_.write(dst, t_size);
 		total += t_size;
 		if (src_data->end()){
-			cout << filename_ << " size = " << total << "\n";
+			cout << filename_ << " size = " << total << "\n"
+				<< "Write " << filename_ << " Finish\n";
 			break;
 		}
 	}

@@ -23,6 +23,13 @@ public:
 		std::cout << "typeid(Ty).name() = " << typeid(Ty).name() << "\n";
 		return static_cast<Ty*>(malloc(count * sizeof(Ty)));
 	}
+
+	friend 
+	bool operator==(const MyAllocator&, const MyAllocator&) { return true; }
+
+	friend 
+	bool operator!=(const MyAllocator&, const MyAllocator&) { return false; }
+
 };
 
 #endif
